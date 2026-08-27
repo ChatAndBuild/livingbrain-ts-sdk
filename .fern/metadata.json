@@ -1,0 +1,18 @@
+{
+    "cliVersion": "5.108.0",
+    "generatorName": "fernapi/fern-typescript-sdk",
+    "generatorVersion": "3.88.3",
+    "generatorConfig": {
+        "namespaceExport": "LivingBrain",
+        "allowCustomFetcher": true,
+        "includeApiReference": true,
+        "enableInlineTypes": true,
+        "inlineFileProperties": true,
+        "omitUndefined": true
+    },
+    "originGitCommit": "637344243657fd17b1319b38e89c940c93885c70",
+    "originGitCommitIsDirty": false,
+    "invokedBy": "manual",
+    "requestedVersion": "0.1.0",
+    "sdkVersion": "0.1.0"
+}
