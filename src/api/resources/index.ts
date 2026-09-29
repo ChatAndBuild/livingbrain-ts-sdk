@@ -3,6 +3,8 @@ export * as brains from "./brains/index.js";
 export * from "./captures/client/requests/index.js";
 export * as captures from "./captures/index.js";
 export * from "./captures/types/index.js";
+export * from "./slack/client/requests/index.js";
+export * as slack from "./slack/index.js";
 export * from "./telegram/client/requests/index.js";
 export * as telegram from "./telegram/index.js";
 export * from "./webhooks/client/requests/index.js";

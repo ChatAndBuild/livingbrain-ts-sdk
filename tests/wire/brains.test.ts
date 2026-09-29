@@ -165,6 +165,33 @@ describe("BrainsClient", () => {
         }).rejects.toThrow(LivingBrain.UnauthorizedError);
     });
 
+    test("create (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { name: "name" };
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.brains.create({
+                name: "name",
+            });
+        }).rejects.toThrow(LivingBrain.ForbiddenError);
+    });
+
     test("bulkStats (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LivingBrainClient({
@@ -397,6 +424,32 @@ describe("BrainsClient", () => {
     });
 
     test("remove (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .delete("/v1/brains/brainId")
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.brains.remove({
+                brainId: "brainId",
+            });
+        }).rejects.toThrow(LivingBrain.ForbiddenError);
+    });
+
+    test("remove (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new LivingBrainClient({
             maxRetries: 0,

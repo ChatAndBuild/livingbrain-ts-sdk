@@ -330,11 +330,12 @@ export class WorkspaceClient {
             async (
                 request: LivingBrain.ListPagesWorkspaceRequest,
             ): Promise<core.WithRawResponse<LivingBrain.PageList>> => {
-                const { brainId, limit, offset, includeDeprecated, bucket, status } = request;
+                const { brainId, limit, offset, includeDeprecated, includeArchived, bucket, status } = request;
                 const _queryParams: Record<string, unknown> = {
                     limit,
                     offset,
                     includeDeprecated,
+                    includeArchived,
                     bucket: bucket != null ? bucket : undefined,
                     status: status != null ? status : undefined,
                 };
@@ -1288,6 +1289,194 @@ export class WorkspaceClient {
             _response.rawResponse,
             "POST",
             "/v1/brains/{brainId}/pages/{slug}/rename",
+        );
+    }
+
+    /**
+     * Archive a page. Archived pages are hidden from lists and search until restored, but their content, versions, and connections are kept. Use `restore` to bring the page back.
+     *
+     * @param {LivingBrain.ArchiveWorkspaceRequest} request
+     * @param {WorkspaceClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link LivingBrain.BadRequestError}
+     * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.NotFoundError}
+     * @throws {@link errors.LivingBrainError}
+     * @throws {@link errors.LivingBrainTimeoutError}
+     *
+     * @example
+     *     await client.workspace.archive({
+     *         brainId: "brainId",
+     *         slug: "slug"
+     *     })
+     */
+    public archive(
+        request: LivingBrain.ArchiveWorkspaceRequest,
+        requestOptions?: WorkspaceClient.RequestOptions,
+    ): core.HttpResponsePromise<LivingBrain.Page> {
+        return core.HttpResponsePromise.fromPromise(this.__archive(request, requestOptions));
+    }
+
+    private async __archive(
+        request: LivingBrain.ArchiveWorkspaceRequest,
+        requestOptions?: WorkspaceClient.RequestOptions,
+    ): Promise<core.WithRawResponse<LivingBrain.Page>> {
+        const { brainId, slug } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "x-subject-id":
+                    requestOptions?.subjectId ?? this._options?.subjectId ?? process.env?.LIVING_BRAIN_SUBJECT_ID,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LivingBrainEnvironment.Production,
+                `v1/brains/${core.url.encodePathParam(brainId)}/pages/${core.url.encodePathParam(slug)}/archive`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as LivingBrain.Page, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new LivingBrain.BadRequestError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new LivingBrain.UnauthorizedError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new LivingBrain.NotFoundError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.LivingBrainError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/brains/{brainId}/pages/{slug}/archive",
+        );
+    }
+
+    /**
+     * Restore an archived page and return it to active status, so it reappears in lists and search.
+     *
+     * @param {LivingBrain.RestoreWorkspaceRequest} request
+     * @param {WorkspaceClient.RequestOptions} requestOptions - Request-specific configuration.
+     *
+     * @throws {@link LivingBrain.BadRequestError}
+     * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.NotFoundError}
+     * @throws {@link errors.LivingBrainError}
+     * @throws {@link errors.LivingBrainTimeoutError}
+     *
+     * @example
+     *     await client.workspace.restore({
+     *         brainId: "brainId",
+     *         slug: "slug"
+     *     })
+     */
+    public restore(
+        request: LivingBrain.RestoreWorkspaceRequest,
+        requestOptions?: WorkspaceClient.RequestOptions,
+    ): core.HttpResponsePromise<LivingBrain.Page> {
+        return core.HttpResponsePromise.fromPromise(this.__restore(request, requestOptions));
+    }
+
+    private async __restore(
+        request: LivingBrain.RestoreWorkspaceRequest,
+        requestOptions?: WorkspaceClient.RequestOptions,
+    ): Promise<core.WithRawResponse<LivingBrain.Page>> {
+        const { brainId, slug } = request;
+        const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
+        const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
+            _authRequest.headers,
+            this._options?.headers,
+            mergeOnlyDefinedHeaders({
+                "x-subject-id":
+                    requestOptions?.subjectId ?? this._options?.subjectId ?? process.env?.LIVING_BRAIN_SUBJECT_ID,
+            }),
+            requestOptions?.headers,
+        );
+        const _response = await (this._options.fetcher ?? core.fetcher)({
+            url: core.url.join(
+                (await core.Supplier.get(this._options.baseUrl)) ??
+                    (await core.Supplier.get(this._options.environment)) ??
+                    environments.LivingBrainEnvironment.Production,
+                `v1/brains/${core.url.encodePathParam(brainId)}/pages/${core.url.encodePathParam(slug)}/restore`,
+            ),
+            method: "POST",
+            headers: _headers,
+            queryString: core.url.queryBuilder().mergeAdditional(requestOptions?.queryParams).build(),
+            timeoutMs: (requestOptions?.timeoutInSeconds ?? this._options?.timeoutInSeconds ?? 60) * 1000,
+            maxRetries: requestOptions?.maxRetries ?? this._options?.maxRetries,
+            abortSignal: requestOptions?.abortSignal,
+            fetchFn: this._options?.fetch,
+            logging: this._options.logging,
+        });
+        if (_response.ok) {
+            return { data: _response.body as LivingBrain.Page, rawResponse: _response.rawResponse };
+        }
+
+        if (_response.error.reason === "status-code") {
+            switch (_response.error.statusCode) {
+                case 400:
+                    throw new LivingBrain.BadRequestError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 401:
+                    throw new LivingBrain.UnauthorizedError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 404:
+                    throw new LivingBrain.NotFoundError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                default:
+                    throw new errors.LivingBrainError({
+                        statusCode: _response.error.statusCode,
+                        body: _response.error.body,
+                        rawResponse: _response.rawResponse,
+                    });
+            }
+        }
+
+        return handleNonStatusCodeError(
+            _response.error,
+            _response.rawResponse,
+            "POST",
+            "/v1/brains/{brainId}/pages/{slug}/restore",
         );
     }
 

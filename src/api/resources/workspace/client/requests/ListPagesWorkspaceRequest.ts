@@ -14,6 +14,8 @@ export interface ListPagesWorkspaceRequest {
     limit?: number;
     offset?: number;
     includeDeprecated?: boolean;
+    /** Include archived pages in the results. Archived pages are hidden from lists and search by default. */
+    includeArchived?: boolean;
     bucket?: LivingBrain.ListPagesWorkspaceRequestBucket;
     status?: LivingBrain.ListPagesWorkspaceRequestStatus;
 }

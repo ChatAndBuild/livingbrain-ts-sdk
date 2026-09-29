@@ -1,6 +1,6 @@
 {
     "name": "@livingbrain/sdk",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "private": false,
     "repository": {
         "type": "git",
@@ -76,6 +76,17 @@
                 "default": "./dist/cjs/api/resources/telegram/exports.js"
             },
             "default": "./dist/cjs/api/resources/telegram/exports.js"
+        },
+        "./slack": {
+            "import": {
+                "types": "./dist/esm/api/resources/slack/exports.d.mts",
+                "default": "./dist/esm/api/resources/slack/exports.mjs"
+            },
+            "require": {
+                "types": "./dist/cjs/api/resources/slack/exports.d.ts",
+                "default": "./dist/cjs/api/resources/slack/exports.js"
+            },
+            "default": "./dist/cjs/api/resources/slack/exports.js"
         },
         "./package.json": "./package.json"
     },

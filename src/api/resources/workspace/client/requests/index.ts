@@ -1,6 +1,7 @@
 export type { AckAllWorkspaceRequest } from "./AckAllWorkspaceRequest.js";
 export type { AckChangeWorkspaceRequest } from "./AckChangeWorkspaceRequest.js";
 export type { AckConnectionWorkspaceRequest } from "./AckConnectionWorkspaceRequest.js";
+export type { ArchiveWorkspaceRequest } from "./ArchiveWorkspaceRequest.js";
 export type { BucketsWorkspaceRequest } from "./BucketsWorkspaceRequest.js";
 export type { ChangesWorkspaceRequest } from "./ChangesWorkspaceRequest.js";
 export type { DeletePermanentlyWorkspaceRequest } from "./DeletePermanentlyWorkspaceRequest.js";
@@ -20,6 +21,7 @@ export type { ProfileSuggestionsWorkspaceRequest } from "./ProfileSuggestionsWor
 export type { RecoverWorkspaceRequest } from "./RecoverWorkspaceRequest.js";
 export type { RenamePageRequest } from "./RenamePageRequest.js";
 export type { ResolveContestedRequest } from "./ResolveContestedRequest.js";
+export type { RestoreWorkspaceRequest } from "./RestoreWorkspaceRequest.js";
 export type { ReviewedWorkspaceRequest } from "./ReviewedWorkspaceRequest.js";
 export type { ScoreHistoryWorkspaceRequest } from "./ScoreHistoryWorkspaceRequest.js";
 export type { ScoreSuggestionsWorkspaceRequest } from "./ScoreSuggestionsWorkspaceRequest.js";

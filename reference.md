@@ -1869,6 +1869,138 @@ await client.workspace.rename({
 </dl>
 </details>
 
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">archive</a>({ ...params }) -> LivingBrain.Page</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Archive a page. Archived pages are hidden from lists and search until restored, but their content, versions, and connections are kept. Use `restore` to bring the page back.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.archive({
+    brainId: "brainId",
+    slug: "slug"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.ArchiveWorkspaceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspaceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">restore</a>({ ...params }) -> LivingBrain.Page</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Restore an archived page and return it to active status, so it reappears in lists and search.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.workspace.restore({
+    brainId: "brainId",
+    slug: "slug"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.RestoreWorkspaceRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `WorkspaceClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
 <details><summary><code>client.workspace.<a href="/src/api/resources/workspace/client/Client.ts">recover</a>({ ...params }) -> LivingBrain.Page</code></summary>
 <dl>
 <dd>
@@ -3314,6 +3446,535 @@ await client.telegram.disconnect({
 <dd>
 
 **requestOptions:** `TelegramClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+## Slack
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">status</a>({ ...params }) -> LivingBrain.SlackStatus</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Return every Slack workspace installed for a brain along with its channel bindings. Use the installation IDs returned here to list channels or create bindings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.status({
+    brainId: "brainId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.StatusSlackRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">startOauth</a>({ ...params }) -> LivingBrain.SlackOAuthStartResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Create a signed Slack OAuth installation URL for a brain. Redirect the user to `authorizationUrl`; Slack sends them back to your redirect URL with a `code` and `state` to pass to `confirmOauth`. The signed state expires at `expiresAt`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.startOauth({
+    brainId: "brainId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.StartOauthSlackRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">confirmOauth</a>({ ...params }) -> LivingBrain.SlackOAuthConfirmResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Complete a Slack installation by exchanging the `code` and `state` Slack returned to your redirect URL. Returns the new installation ID.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.confirmOauth({
+    brainId: "brainId",
+    code: "code",
+    state: "state"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.ConfirmSlackOAuthRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">channels</a>({ ...params }) -> LivingBrain.SlackChannel[]</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+List the channels visible to the Living Brain bot in a Slack installation. `isMember` tells you whether the bot has already been added to the channel.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.channels({
+    brainId: "brainId",
+    installationId: "installationId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.ChannelsSlackRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">bind</a>({ ...params }) -> LivingBrain.SlackBinding</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Connect a Slack channel to a brain so it receives brain notifications. Configure which notifications it receives with `updateBinding`.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.bind({
+    brainId: "brainId",
+    installationId: "installationId",
+    channelId: "C0123456789"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.BindSlackChannelRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">unbind</a>({ ...params }) -> LivingBrain.SlackDisconnectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disconnect a single Slack channel from a brain. The Slack installation and any other bindings are unaffected.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.unbind({
+    brainId: "brainId",
+    bindingId: "bindingId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.UnbindSlackRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">updateBinding</a>({ ...params }) -> LivingBrain.SlackBinding</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Update which notifications a bound Slack channel receives — daily briefs, new connections, and page changes. Omitted fields are left unchanged.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.updateBinding({
+    brainId: "brainId",
+    bindingId: "bindingId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.UpdateSlackBindingRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
+    
+</dd>
+</dl>
+</dd>
+</dl>
+
+
+</dd>
+</dl>
+</details>
+
+<details><summary><code>client.slack.<a href="/src/api/resources/slack/client/Client.ts">disconnectInstallation</a>({ ...params }) -> LivingBrain.SlackDisconnectResponse</code></summary>
+<dl>
+<dd>
+
+#### 📝 Description
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+Disconnect a Slack workspace from a brain and remove all of its channel bindings.
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### 🔌 Usage
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+```typescript
+await client.slack.disconnectInstallation({
+    brainId: "brainId",
+    installationId: "installationId"
+});
+
+```
+</dd>
+</dl>
+</dd>
+</dl>
+
+#### ⚙️ Parameters
+
+<dl>
+<dd>
+
+<dl>
+<dd>
+
+**request:** `LivingBrain.DisconnectInstallationSlackRequest` 
+    
+</dd>
+</dl>
+
+<dl>
+<dd>
+
+**requestOptions:** `SlackClient.RequestOptions` 
     
 </dd>
 </dl>

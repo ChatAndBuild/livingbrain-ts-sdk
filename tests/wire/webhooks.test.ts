@@ -68,6 +68,24 @@ describe("WebhooksClient", () => {
         }).rejects.toThrow(LivingBrain.UnauthorizedError);
     });
 
+    test("list (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server.mockEndpoint().get("/v1/webhooks").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.webhooks.list();
+        }).rejects.toThrow(LivingBrain.ForbiddenError);
+    });
+
     test("create (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LivingBrainClient({
@@ -157,6 +175,33 @@ describe("WebhooksClient", () => {
         }).rejects.toThrow(LivingBrain.UnauthorizedError);
     });
 
+    test("create (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = { url: "url" };
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/webhooks")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.webhooks.create({
+                url: "url",
+            });
+        }).rejects.toThrow(LivingBrain.ForbiddenError);
+    });
+
     test("remove (1)", async () => {
         const server = mockServerPool.createServer();
         const client = new LivingBrainClient({
@@ -217,6 +262,26 @@ describe("WebhooksClient", () => {
     });
 
     test("remove (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server.mockEndpoint().delete("/v1/webhooks/id").respondWith().statusCode(403).jsonBody(rawResponseBody).build();
+
+        await expect(async () => {
+            return await client.webhooks.remove({
+                id: "id",
+            });
+        }).rejects.toThrow(LivingBrain.ForbiddenError);
+    });
+
+    test("remove (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new LivingBrainClient({
             maxRetries: 0,
@@ -325,6 +390,33 @@ describe("WebhooksClient", () => {
     });
 
     test("update (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+        const rawRequestBody = {};
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .patch("/v1/webhooks/id")
+            .jsonBody(rawRequestBody)
+            .respondWith()
+            .statusCode(403)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.webhooks.update({
+                id: "id",
+            });
+        }).rejects.toThrow(LivingBrain.ForbiddenError);
+    });
+
+    test("update (5)", async () => {
         const server = mockServerPool.createServer();
         const client = new LivingBrainClient({
             maxRetries: 0,
