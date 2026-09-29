@@ -268,6 +268,7 @@ describe("WorkspaceClient", () => {
                     createdAt: "createdAt",
                 },
             ],
+            truncated: true,
         };
 
         server
@@ -1662,6 +1663,274 @@ describe("WorkspaceClient", () => {
 
         await expect(async () => {
             return await client.workspace.rename({
+                brainId: "brainId",
+                slug: "slug",
+            });
+        }).rejects.toThrow(LivingBrain.NotFoundError);
+    });
+
+    test("archive (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            id: "id",
+            tenantId: "tenantId",
+            subjectId: "subjectId",
+            brainId: "brainId",
+            source: { channel: "chat", ref: "ref", label: "via Sales Agent" },
+            pageType: "source",
+            bucket: "inbox",
+            bucketSource: "auto",
+            slug: "slug",
+            title: "title",
+            summary: "summary",
+            body: "body",
+            entities: ["entities"],
+            sources: [
+                { ingestSourceId: "ingestSourceId", chunkUuids: ["chunkUuids"], attachedAt: "2024-01-15T09:30:00Z" },
+            ],
+            backlinks: ["backlinks"],
+            embedding: [1.1],
+            version: 1,
+            pinned: true,
+            archived: true,
+            status: "active",
+            lastCompiledAt: "2024-01-15T09:30:00Z",
+            lastReferencedAt: "2024-01-15T09:30:00Z",
+            createdAt: "2024-01-15T09:30:00Z",
+            updatedAt: "2024-01-15T09:30:00Z",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/archive")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.archive({
+            brainId: "brainId",
+            slug: "slug",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("archive (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/archive")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.archive({
+                brainId: "brainId",
+                slug: "slug",
+            });
+        }).rejects.toThrow(LivingBrain.BadRequestError);
+    });
+
+    test("archive (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/archive")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.archive({
+                brainId: "brainId",
+                slug: "slug",
+            });
+        }).rejects.toThrow(LivingBrain.UnauthorizedError);
+    });
+
+    test("archive (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/archive")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.archive({
+                brainId: "brainId",
+                slug: "slug",
+            });
+        }).rejects.toThrow(LivingBrain.NotFoundError);
+    });
+
+    test("restore (1)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = {
+            id: "id",
+            tenantId: "tenantId",
+            subjectId: "subjectId",
+            brainId: "brainId",
+            source: { channel: "chat", ref: "ref", label: "via Sales Agent" },
+            pageType: "source",
+            bucket: "inbox",
+            bucketSource: "auto",
+            slug: "slug",
+            title: "title",
+            summary: "summary",
+            body: "body",
+            entities: ["entities"],
+            sources: [
+                { ingestSourceId: "ingestSourceId", chunkUuids: ["chunkUuids"], attachedAt: "2024-01-15T09:30:00Z" },
+            ],
+            backlinks: ["backlinks"],
+            embedding: [1.1],
+            version: 1,
+            pinned: true,
+            archived: true,
+            status: "active",
+            lastCompiledAt: "2024-01-15T09:30:00Z",
+            lastReferencedAt: "2024-01-15T09:30:00Z",
+            createdAt: "2024-01-15T09:30:00Z",
+            updatedAt: "2024-01-15T09:30:00Z",
+        };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/restore")
+            .respondWith()
+            .statusCode(200)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        const response = await client.workspace.restore({
+            brainId: "brainId",
+            slug: "slug",
+        });
+        expect(response).toEqual(rawResponseBody);
+    });
+
+    test("restore (2)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/restore")
+            .respondWith()
+            .statusCode(400)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.restore({
+                brainId: "brainId",
+                slug: "slug",
+            });
+        }).rejects.toThrow(LivingBrain.BadRequestError);
+    });
+
+    test("restore (3)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/restore")
+            .respondWith()
+            .statusCode(401)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.restore({
+                brainId: "brainId",
+                slug: "slug",
+            });
+        }).rejects.toThrow(LivingBrain.UnauthorizedError);
+    });
+
+    test("restore (4)", async () => {
+        const server = mockServerPool.createServer();
+        const client = new LivingBrainClient({
+            maxRetries: 0,
+            apiKey: "test",
+            subjectId: "test",
+            environment: server.baseUrl,
+        });
+
+        const rawResponseBody = { statusCode: 1, timestamp: "timestamp", path: "path", message: "message" };
+
+        server
+            .mockEndpoint()
+            .post("/v1/brains/brainId/pages/slug/restore")
+            .respondWith()
+            .statusCode(404)
+            .jsonBody(rawResponseBody)
+            .build();
+
+        await expect(async () => {
+            return await client.workspace.restore({
                 brainId: "brainId",
                 slug: "slug",
             });

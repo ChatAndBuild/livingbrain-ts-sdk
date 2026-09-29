@@ -29,6 +29,8 @@ export interface IngestSource {
     chunkUuids: string[];
     /** Compile pipeline status */
     status: IngestSource.Status;
+    /** Original file/note bytes counted toward account storage */
+    originalBytes: number | null;
     /** Last compile error, if any */
     lastError: string | null;
     /** Ids of pages this source contributed to */

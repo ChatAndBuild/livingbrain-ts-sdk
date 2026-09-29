@@ -30,6 +30,7 @@ export class WebhooksClient {
      *
      * @throws {@link LivingBrain.BadRequestError}
      * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.ForbiddenError}
      * @throws {@link errors.LivingBrainError}
      * @throws {@link errors.LivingBrainTimeoutError}
      *
@@ -87,6 +88,11 @@ export class WebhooksClient {
                         _response.error.body as LivingBrain.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 403:
+                    throw new LivingBrain.ForbiddenError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.LivingBrainError({
                         statusCode: _response.error.statusCode,
@@ -107,6 +113,7 @@ export class WebhooksClient {
      *
      * @throws {@link LivingBrain.BadRequestError}
      * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.ForbiddenError}
      * @throws {@link errors.LivingBrainError}
      * @throws {@link errors.LivingBrainTimeoutError}
      *
@@ -171,6 +178,11 @@ export class WebhooksClient {
                         _response.error.body as LivingBrain.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 403:
+                    throw new LivingBrain.ForbiddenError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 default:
                     throw new errors.LivingBrainError({
                         statusCode: _response.error.statusCode,
@@ -191,6 +203,7 @@ export class WebhooksClient {
      *
      * @throws {@link LivingBrain.BadRequestError}
      * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.ForbiddenError}
      * @throws {@link LivingBrain.NotFoundError}
      * @throws {@link errors.LivingBrainError}
      * @throws {@link errors.LivingBrainTimeoutError}
@@ -254,6 +267,11 @@ export class WebhooksClient {
                         _response.error.body as LivingBrain.ErrorResponse,
                         _response.rawResponse,
                     );
+                case 403:
+                    throw new LivingBrain.ForbiddenError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
                 case 404:
                     throw new LivingBrain.NotFoundError(
                         _response.error.body as LivingBrain.ErrorResponse,
@@ -279,6 +297,7 @@ export class WebhooksClient {
      *
      * @throws {@link LivingBrain.BadRequestError}
      * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.ForbiddenError}
      * @throws {@link LivingBrain.NotFoundError}
      * @throws {@link errors.LivingBrainError}
      * @throws {@link errors.LivingBrainTimeoutError}
@@ -342,6 +361,11 @@ export class WebhooksClient {
                     );
                 case 401:
                     throw new LivingBrain.UnauthorizedError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new LivingBrain.ForbiddenError(
                         _response.error.body as LivingBrain.ErrorResponse,
                         _response.rawResponse,
                     );

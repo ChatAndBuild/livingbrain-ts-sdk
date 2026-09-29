@@ -105,6 +105,7 @@ export class BrainsClient {
      *
      * @throws {@link LivingBrain.BadRequestError}
      * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.ForbiddenError}
      * @throws {@link errors.LivingBrainError}
      * @throws {@link errors.LivingBrainTimeoutError}
      *
@@ -166,6 +167,11 @@ export class BrainsClient {
                     );
                 case 401:
                     throw new LivingBrain.UnauthorizedError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new LivingBrain.ForbiddenError(
                         _response.error.body as LivingBrain.ErrorResponse,
                         _response.rawResponse,
                     );
@@ -367,6 +373,7 @@ export class BrainsClient {
      *
      * @throws {@link LivingBrain.BadRequestError}
      * @throws {@link LivingBrain.UnauthorizedError}
+     * @throws {@link LivingBrain.ForbiddenError}
      * @throws {@link LivingBrain.NotFoundError}
      * @throws {@link errors.LivingBrainError}
      * @throws {@link errors.LivingBrainTimeoutError}
@@ -427,6 +434,11 @@ export class BrainsClient {
                     );
                 case 401:
                     throw new LivingBrain.UnauthorizedError(
+                        _response.error.body as LivingBrain.ErrorResponse,
+                        _response.rawResponse,
+                    );
+                case 403:
+                    throw new LivingBrain.ForbiddenError(
                         _response.error.body as LivingBrain.ErrorResponse,
                         _response.rawResponse,
                     );

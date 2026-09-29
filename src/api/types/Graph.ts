@@ -7,4 +7,6 @@ export interface Graph {
     nodes: LivingBrain.GraphNode[];
     /** Connections between the returned nodes. */
     edges: LivingBrain.GraphEdge[];
+    /** True when eligible pages exceeded the requested node limit */
+    truncated: boolean;
 }

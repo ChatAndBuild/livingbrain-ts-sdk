@@ -2,6 +2,7 @@
 
 import { BrainsClient } from "./api/resources/brains/client/Client.js";
 import { CapturesClient } from "./api/resources/captures/client/Client.js";
+import { SlackClient } from "./api/resources/slack/client/Client.js";
 import { TelegramClient } from "./api/resources/telegram/client/Client.js";
 import { WebhooksClient } from "./api/resources/webhooks/client/Client.js";
 import { WorkspaceClient } from "./api/resources/workspace/client/Client.js";
@@ -22,6 +23,7 @@ export class LivingBrainClient {
     protected _workspace: WorkspaceClient | undefined;
     protected _webhooks: WebhooksClient | undefined;
     protected _telegram: TelegramClient | undefined;
+    protected _slack: SlackClient | undefined;
 
     constructor(options: LivingBrainClient.Options) {
         this._options = normalizeClientOptionsWithAuth(options);
@@ -45,6 +47,10 @@ export class LivingBrainClient {
 
     public get telegram(): TelegramClient {
         return (this._telegram ??= new TelegramClient(this._options));
+    }
+
+    public get slack(): SlackClient {
+        return (this._slack ??= new SlackClient(this._options));
     }
 
     /**
