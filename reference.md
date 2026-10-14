@@ -260,7 +260,7 @@ await client.brains.get({
 <dl>
 <dd>
 
-Permanently delete a brain along with all of its pages, sources, connections, and change history. This cannot be undone.
+Soft-delete a brain and disable its active data.
 </dd>
 </dl>
 </dd>
