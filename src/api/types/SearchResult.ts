@@ -15,6 +15,8 @@ export interface SearchResult {
     status: SearchResult.Status;
     /** Similarity score (0-1) */
     similarity: number;
+    /** Why the page matched: semantic similarity, keyword (title/summary/body words), or both. Keyword matches are returned even when similarity is below minSimilarity. */
+    matchedOn: SearchResult.MatchedOn;
 }
 
 export namespace SearchResult {
@@ -37,4 +39,11 @@ export namespace SearchResult {
         Archived: "archived",
     } as const;
     export type Status = (typeof Status)[keyof typeof Status];
+    /** Why the page matched: semantic similarity, keyword (title/summary/body words), or both. Keyword matches are returned even when similarity is below minSimilarity. */
+    export const MatchedOn = {
+        Semantic: "semantic",
+        Keyword: "keyword",
+        Both: "both",
+    } as const;
+    export type MatchedOn = (typeof MatchedOn)[keyof typeof MatchedOn];
 }

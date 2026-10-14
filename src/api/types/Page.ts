@@ -33,8 +33,6 @@ export interface Page {
     sources: LivingBrain.PageSourceRef[];
     /** Wikilink slugs referenced by the body */
     backlinks: string[];
-    /** Vector embedding used for semantic search (internal; can be large) */
-    embedding: number[];
     /** Monotonic version, bumped on every compile/edit */
     version: number;
     /** Pinned pages rank first in the prompt index and are exempt from deprecation. */
