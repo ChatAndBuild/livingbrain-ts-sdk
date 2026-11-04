@@ -1,7 +1,7 @@
 # Living Brain TypeScript Library
 
 [![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2FChatAndBuild%2Flivingbrain-ts-sdk)
-[![npm shield](https://img.shields.io/npm/v/@livingbrain/sdk)](https://www.npmjs.com/package/@livingbrain/sdk)
+[![npm shield](https://img.shields.io/npm/v/@living-brain/sdk)](https://www.npmjs.com/package/@living-brain/sdk)
 
 The Living Brain TypeScript library provides convenient access to the Living Brain APIs from TypeScript.
 
@@ -45,7 +45,7 @@ changes there, not here, or they'll be overwritten on the next generation.
 ## Installation
 
 ```sh
-npm i -s @livingbrain/sdk
+npm i -s @living-brain/sdk
 ```
 
 ## Reference
@@ -57,7 +57,7 @@ A full reference for this library is available [here](https://github.com/ChatAnd
 Instantiate and use the client with the following:
 
 ```typescript
-import { LivingBrainClient } from "@livingbrain/sdk";
+import { LivingBrainClient } from "@living-brain/sdk";
 
 const client = new LivingBrainClient({ apiKey: "YOUR_API_KEY", subjectId: "YOUR_SUBJECT_ID" });
 await client.brains.create({
@@ -70,7 +70,7 @@ await client.brains.create({
 This SDK allows you to configure different environments for API requests.
 
 ```typescript
-import { LivingBrainClient, LivingBrainEnvironment } from "@livingbrain/sdk";
+import { LivingBrainClient, LivingBrainEnvironment } from "@living-brain/sdk";
 
 const client = new LivingBrainClient({
     environment: LivingBrainEnvironment.Production,
@@ -83,7 +83,7 @@ The SDK exports all request and response types as TypeScript interfaces. Simply 
 following namespace:
 
 ```typescript
-import { LivingBrain } from "@livingbrain/sdk";
+import { LivingBrain } from "@living-brain/sdk";
 
 const request: LivingBrain.CreateBrainRequest = {
     ...
@@ -96,7 +96,7 @@ When the API returns a non-success status code (4xx or 5xx response), a subclass
 will be thrown.
 
 ```typescript
-import { LivingBrainError } from "@livingbrain/sdk";
+import { LivingBrainError } from "@living-brain/sdk";
 
 try {
     await client.brains.create(...);
@@ -115,7 +115,7 @@ try {
 List endpoints are paginated. The SDK provides an iterator so that you can simply loop over the items:
 
 ```typescript
-import { LivingBrainClient } from "@livingbrain/sdk";
+import { LivingBrainClient } from "@living-brain/sdk";
 
 const client = new LivingBrainClient({ apiKey: "YOUR_API_KEY", subjectId: "YOUR_SUBJECT_ID" });
 const pageableResponse = await client.captures.listSources({
@@ -144,7 +144,7 @@ const response = page.response;
 This SDK supports direct imports of subpackage clients, which allows JavaScript bundlers to tree-shake and include only the imported subpackage code. This results in much smaller bundle sizes.
 
 ```typescript
-import { BrainsClient } from '@livingbrain/sdk/brains';
+import { BrainsClient } from '@living-brain/sdk/brains';
 
 const client = new BrainsClient({...});
 ```
@@ -154,7 +154,7 @@ const client = new BrainsClient({...});
 If you would like to send additional headers as part of the request, use the `headers` request option.
 
 ```typescript
-import { LivingBrainClient } from "@livingbrain/sdk";
+import { LivingBrainClient } from "@living-brain/sdk";
 
 const client = new LivingBrainClient({
     ...
@@ -249,7 +249,7 @@ console.log(rawResponse.headers['X-My-Header']);
 The SDK supports logging. You can configure the logger by passing in a `logging` object to the client options.
 
 ```typescript
-import { LivingBrainClient, logging } from "@livingbrain/sdk";
+import { LivingBrainClient, logging } from "@living-brain/sdk";
 
 const client = new LivingBrainClient({
     ...
@@ -333,7 +333,7 @@ The SDK provides a way for you to customize the underlying HTTP client / Fetch f
 unsupported environment, this provides a way for you to break glass and ensure the SDK works.
 
 ```typescript
-import { LivingBrainClient } from "@livingbrain/sdk";
+import { LivingBrainClient } from "@living-brain/sdk";
 
 const client = new LivingBrainClient({
     ...
