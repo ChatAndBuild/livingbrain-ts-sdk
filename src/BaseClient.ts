@@ -69,9 +69,9 @@ export function normalizeClientOptions<T extends BaseClientOptions = BaseClientO
     const headers = mergeHeaders(
         {
             "X-Fern-Language": "JavaScript",
-            "X-Fern-SDK-Name": "@livingbrain/sdk",
+            "X-Fern-SDK-Name": "@living-brain/sdk",
             "X-Fern-SDK-Version": "0.3.1",
-            "User-Agent": "@livingbrain/sdk/0.3.1",
+            "User-Agent": "@living-brain/sdk/0.3.1",
             "X-Fern-Runtime": core.RUNTIME.type,
             "X-Fern-Runtime-Version": core.RUNTIME.version,
             "x-subject-id": options?.subjectId ?? process.env?.LIVING_BRAIN_SUBJECT_ID,

@@ -10,7 +10,7 @@
         "inlineFileProperties": true,
         "omitUndefined": true
     },
-    "originGitCommit": "e14c8af048918e29cba5ad3e6b784626b9241634",
+    "originGitCommit": "30bb1ea5faa8bcc05e603e61824d168ee059f7d8",
     "originGitCommitIsDirty": false,
     "invokedBy": "ci",
     "requestedVersion": "0.3.1",
