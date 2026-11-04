@@ -1,5 +1,11 @@
 # Changelog
 
+## [0.3.1] - 2026-11-04
+
+- Updated repository metadata after the SDK repositories moved to `ChatAndBuild`.
+- `brains.runBrief` now returns `BriefRunResponse | null` when there is no recent activity.
+- Added an OIDC-based npm publishing workflow.
+
 ## [0.3.0] - 2026-10-14
 
 - Regenerated from the Oct 14 OpenAPI export.

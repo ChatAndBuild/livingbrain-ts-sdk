@@ -740,7 +740,7 @@ export class BrainsClient {
     }
 
     /**
-     * Generate this brain's daily brief immediately instead of waiting for its scheduled run. Returns the brief content once generation completes.
+     * Generate this brain's daily brief immediately instead of waiting for its scheduled run. Returns the generated brief page's id and slug, or `null` when the last 7 days had no activity to brief.
      *
      * @param {LivingBrain.RunBriefBrainsRequest} request
      * @param {BrainsClient.RequestOptions} requestOptions - Request-specific configuration.
@@ -759,14 +759,14 @@ export class BrainsClient {
     public runBrief(
         request: LivingBrain.RunBriefBrainsRequest,
         requestOptions?: BrainsClient.RequestOptions,
-    ): core.HttpResponsePromise<LivingBrain.BriefRunResponse> {
+    ): core.HttpResponsePromise<LivingBrain.BriefRunResponse | null> {
         return core.HttpResponsePromise.fromPromise(this.__runBrief(request, requestOptions));
     }
 
     private async __runBrief(
         request: LivingBrain.RunBriefBrainsRequest,
         requestOptions?: BrainsClient.RequestOptions,
-    ): Promise<core.WithRawResponse<LivingBrain.BriefRunResponse>> {
+    ): Promise<core.WithRawResponse<LivingBrain.BriefRunResponse | null>> {
         const { brainId } = request;
         const _authRequest: core.AuthRequest = await this._options.authProvider.getAuthRequest();
         const _headers: core.Fetcher.Args["headers"] = mergeHeaders(
@@ -795,7 +795,7 @@ export class BrainsClient {
             logging: this._options.logging,
         });
         if (_response.ok) {
-            return { data: _response.body as LivingBrain.BriefRunResponse, rawResponse: _response.rawResponse };
+            return { data: _response.body as LivingBrain.BriefRunResponse | null, rawResponse: _response.rawResponse };
         }
 
         if (_response.error.reason === "status-code") {
