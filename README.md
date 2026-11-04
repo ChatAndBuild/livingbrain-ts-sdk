@@ -1,6 +1,5 @@
 # Living Brain TypeScript Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2FChatAndBuild%2Flivingbrain-ts-sdk)
 [![npm shield](https://img.shields.io/npm/v/@living-brain/sdk)](https://www.npmjs.com/package/@living-brain/sdk)
 
 The Living Brain TypeScript library provides convenient access to the Living Brain APIs from TypeScript.
