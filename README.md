@@ -1,6 +1,6 @@
 # Living Brain TypeScript Library
 
-[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2Ffern-demo%2Flivingbrain-ts-sdk)
+[![fern shield](https://img.shields.io/badge/%F0%9F%8C%BF-Built%20with%20Fern-brightgreen)](https://buildwithfern.com?utm_source=github&utm_medium=github&utm_campaign=readme&utm_source=https%3A%2F%2Fgithub.com%2FChatAndBuild%2Flivingbrain-ts-sdk)
 [![npm shield](https://img.shields.io/npm/v/@livingbrain/sdk)](https://www.npmjs.com/package/@livingbrain/sdk)
 
 The Living Brain TypeScript library provides convenient access to the Living Brain APIs from TypeScript.
@@ -50,7 +50,7 @@ npm i -s @livingbrain/sdk
 
 ## Reference
 
-A full reference for this library is available [here](https://github.com/fern-demo/livingbrain-ts-sdk/blob/HEAD/./reference.md).
+A full reference for this library is available [here](https://github.com/ChatAndBuild/livingbrain-ts-sdk/blob/HEAD/./reference.md).
 
 ## Usage
 

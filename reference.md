@@ -513,7 +513,7 @@ await client.brains.updateBriefSettings({
 </dl>
 </details>
 
-<details><summary><code>client.brains.<a href="/src/api/resources/brains/client/Client.ts">runBrief</a>({ ...params }) -> LivingBrain.BriefRunResponse</code></summary>
+<details><summary><code>client.brains.<a href="/src/api/resources/brains/client/Client.ts">runBrief</a>({ ...params }) -> LivingBrain.BriefRunResponse | null</code></summary>
 <dl>
 <dd>
 
@@ -525,7 +525,7 @@ await client.brains.updateBriefSettings({
 <dl>
 <dd>
 
-Generate this brain's daily brief immediately instead of waiting for its scheduled run. Returns the brief content once generation completes.
+Generate this brain's daily brief immediately instead of waiting for its scheduled run. Returns the generated brief page's id and slug, or `null` when the last 7 days had no activity to brief.
 </dd>
 </dl>
 </dd>
